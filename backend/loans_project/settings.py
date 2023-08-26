@@ -38,7 +38,13 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # third party apps
+    "drf_yasg",
+    "silk",
     "rest_framework",
+    "django_filters",
+    # Local apps
+    "apps.common",
+    "apps.loans",
 ]
 
 MIDDLEWARE = [
@@ -82,6 +88,16 @@ DATABASES = {
     }
 }
 
+# Django REST Framework
+# https://www.django-rest-framework.org/api-guide/settings/
+REST_FRAMEWORK = {
+    "DEFAULT_PAGINATION_CLASS": "apps.common.global_drf_pagination.CustomPagination",
+    "PAGE_SIZE": 50,
+    "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
+    "EXCEPTION_HANDLER": "apps.common.global_drf_exception.custom_exception_handler",
+    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
+}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -123,6 +139,14 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Silk
+SILKY_PYTHON_PROFILER = False
+SILKY_ENABLE_PROFILER = False
+SILKY_AUTHENTICATION = True
+SILKY_AUTHORISATION = True
+SILKY_INTERCEPT_PERCENT = 0
+SILKY_PERMISSIONS = lambda user: user.is_superuser
 
 try:
     from .local_settings import *

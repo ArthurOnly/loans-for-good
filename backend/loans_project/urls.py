@@ -13,9 +13,12 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from apps.common.global_swagger import urlpatterns as swagger_urlpatterns
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("silk/", include("silk.urls", namespace="silk")),
+    path("docs/", include(swagger_urlpatterns)),
 ]
