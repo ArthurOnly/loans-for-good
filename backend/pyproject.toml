@@ -1,8 +1,9 @@
 [tool.black]
 line-length = 119
 exclude = '''
-/(\.git|\.venv|env|venv|__pycache__|build|dist|migrations|frontend-vue)/
+/(\.git|\.venv|env|venv|__pycache__|build|dist|migrations)/
 '''
 
 [tool.isort]
 profile = "black"
+src_paths = ["backend"]

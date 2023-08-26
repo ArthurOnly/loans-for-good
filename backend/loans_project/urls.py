@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from apps.common.global_swagger import urlpatterns as swagger_urlpatterns
+from apps.loans.api.router import urlpatterns as loans_api_urlpatterns
 from django.contrib import admin
 from django.urls import include, path
 
@@ -21,4 +22,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("silk/", include("silk.urls", namespace="silk")),
     path("docs/", include(swagger_urlpatterns)),
+    path("api/v1/", include(loans_api_urlpatterns)),
 ]

@@ -1,7 +1,21 @@
-from django.urls import path, re_path
+from django.urls import path
 from drf_yasg import openapi
+from drf_yasg.generators import SchemaGenerator
+from drf_yasg.inspectors import SerializerInspector
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions
+
+from apps.loans.api.serializers import LoanRequestCreateSerializer
+
+
+class CustomSerializerInspector(SerializerInspector):
+    def process_serializer(self, serializer):
+        #if isinstance(serializer, LoanRequestCreateSerializer):
+        #    return self.get_request_serializer_fields(serializer)
+        return super().process_serializer(serializer)
+
+class CustomSchemaGenerator(SchemaGenerator):
+    inspector_cls = CustomSerializerInspector
 
 schema_view = get_schema_view(
     openapi.Info(
