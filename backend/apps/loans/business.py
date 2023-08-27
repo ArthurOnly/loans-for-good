@@ -1,21 +1,22 @@
-from apps.loans.models import LoanRequest
+from apps.loans.models import LoanRequest, LoanRequestQuestionResponse
+from apps.loans.tasks import credit_analysis_task
+from django.db import transaction
 
 
 def create_loan_request(data):
-    #{'questions': [OrderedDict([('label', 'Nome'), ('value', 'Arthur'), ('file', <InMemoryUploadedFile: suap.png (image/png)>)])]}
     questions = data.get("response")
 
-    for question in questions:
-        if "file" not in question.keys():
-            continue
-        file = question.get("file", None)
-        if file:
-            # store and get path
-            pass
-            question["value"] = "filepath"
+    with transaction.atomic():
+        loan_request = LoanRequest.objects.create()
 
-        question.pop("file")
-        
-    
-    loan_request = LoanRequest.objects.create(response=questions)
+        question_responses = [
+            LoanRequestQuestionResponse(loan_request=loan_request, **question_data)
+            for question_data in questions
+        ]
+        LoanRequestQuestionResponse.objects.bulk_create(question_responses)
+
+        responses_dict = {question.question_key: question.value for question in question_responses}
+
+        credit_analysis_task.delay(loan_request.id, responses_dict)
+
     return loan_request

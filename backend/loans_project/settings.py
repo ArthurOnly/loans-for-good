@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "silk",
     "rest_framework",
     "django_filters",
+    "corsheaders",
     # Local apps
     "apps.common",
     "apps.loans",
@@ -50,6 +51,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -141,12 +143,23 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Silk
+
 SILKY_PYTHON_PROFILER = False
 SILKY_ENABLE_PROFILER = False
 SILKY_AUTHENTICATION = True
 SILKY_AUTHORISATION = True
 SILKY_INTERCEPT_PERCENT = 0
 SILKY_PERMISSIONS = lambda user: user.is_superuser
+
+# Celery
+
+CELERY_TIMEZONE = "America/Sao_Paulo"
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
+CELERY_BROKER_URL = "redis://redis:6379"
+CELERY_RESULT_BACKEND = "redis://redis:6379"
+CELERY_IMPORTS = ('apps.loans.tasks',)
+
 
 try:
     from .local_settings import *

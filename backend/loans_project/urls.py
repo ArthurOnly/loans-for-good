@@ -15,6 +15,8 @@ Including another URLconf
 """
 from apps.common.global_swagger import urlpatterns as swagger_urlpatterns
 from apps.loans.api.router import urlpatterns as loans_api_urlpatterns
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
@@ -24,3 +26,7 @@ urlpatterns = [
     path("docs/", include(swagger_urlpatterns)),
     path("api/v1/", include(loans_api_urlpatterns)),
 ]
+
+# In production should be handled by another tool (nginx, apache, etc)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

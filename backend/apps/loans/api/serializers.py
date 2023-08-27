@@ -21,17 +21,19 @@ class LoanRequestSerializer(serializers.ModelSerializer):
         model = LoanRequest
         fields = ("id", "status_external", "status_internal", "response", "created_at")
 
+class LoanRequestResponseSerializer(serializers.Serializer):
+    question_label = serializers.CharField()
+    question_key = serializers.CharField()
+    value = serializers.CharField(required=False)
+    file = serializers.FileField(required=False)
+
 class LoanRequestSerializer(serializers.ModelSerializer):
+    loanrequestquestionresponse_set = LoanRequestResponseSerializer(many=True) 
     class Meta:
         model = LoanRequest
-        fields = ("id", "status_external", "status_internal", "response", "created_at")
+        fields = ("id", "status_external", "status_internal", "loanrequestquestionresponse_set", "created_at")
 
 class LoanRequestCreateSerializer(serializers.Serializer):
-    class LoanRequestResponseSerializer(serializers.Serializer):
-        label = serializers.CharField()
-        value = serializers.CharField(required=False)
-        file = serializers.FileField(required=False)
-
     response = LoanRequestResponseSerializer(many=True)
 
     def to_internal_value(self, data):

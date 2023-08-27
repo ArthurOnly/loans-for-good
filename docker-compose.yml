@@ -56,6 +56,24 @@ services:
     depends_on:
       - redis
       - postgres
+  celery:
+    container_name: loans_celery
+    build:
+      context: ./
+      dockerfile: docker/DockerfileDjango
+    command: 
+      - sh
+      - -c
+      - |
+        pip install -r requirements.txt &&
+        celery -A loans_project worker -l INFO
+    networks:
+      - default
+    volumes:
+      - .:/code
+    depends_on:
+      - redis
+      - postgres
 
 volumes:
   postgres_data:
