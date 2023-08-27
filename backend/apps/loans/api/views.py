@@ -1,11 +1,16 @@
-from apps.common.global_drf_viewsets import (CustomModelViewSet,
-                                             CustomReadOnlyModelViewSet)
-from apps.loans.api.serializers import (LoanRequestCreateSerializer,
-                                        LoanRequestSerializer,
-                                        QuestionSerializer)
-from apps.loans.models import LoanRequest, Question
 from rest_framework import permissions
 from rest_framework.parsers import MultiPartParser
+
+from apps.common.global_drf_viewsets import (
+    CustomModelViewSet,
+    CustomReadOnlyModelViewSet,
+)
+from apps.loans.api.serializers import (
+    LoanRequestCreateSerializer,
+    LoanRequestSerializer,
+    QuestionSerializer,
+)
+from apps.loans.models import LoanRequest, Question
 
 
 class QuestionViewSet(CustomReadOnlyModelViewSet):
@@ -17,6 +22,8 @@ class QuestionViewSet(CustomReadOnlyModelViewSet):
         "active": ["exact"],
     }
     search_fields = ["label"]
+    qs_list_prefetch_fields = ["questionoption_set"]
+    qs_prefetch_fields = qs_list_prefetch_fields
 
 
 class LoanRequestViewset(CustomModelViewSet):
@@ -28,12 +35,11 @@ class LoanRequestViewset(CustomModelViewSet):
         "default": LoanRequestSerializer,
         "create": LoanRequestCreateSerializer,
     }
+    qs_list_prefetch_fields = ["loanrequestquestionresponse_set"]
+    qs_prefetch_fields = qs_list_prefetch_fields
 
     def get_parsers(self):
-        if getattr(self, 'swagger_fake_view', False):
+        # Swagger UI does not support nested multipart form data
+        if getattr(self, "swagger_fake_view", False):
             return []
         return super().get_parsers()
-
-
-
-

@@ -1,0 +1,144 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-27 16:09-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: apps/loans/models.py:7
+msgid "Text"
+msgstr "Texto"
+
+#: apps/loans/models.py:8
+msgid "Number"
+msgstr "Número"
+
+#: apps/loans/models.py:9
+msgid "Select"
+msgstr "Selecionar"
+
+#: apps/loans/models.py:10
+msgid "Date"
+msgstr "Data"
+
+#: apps/loans/models.py:11 apps/loans/models.py:55
+msgid "File"
+msgstr "Arquivo"
+
+#: apps/loans/models.py:12
+msgid "Boolean"
+msgstr "Booleano"
+
+#: apps/loans/models.py:14 apps/loans/models.py:35
+msgid "Label"
+msgstr "Etiqueta"
+
+#: apps/loans/models.py:15
+msgid "Key"
+msgstr "Chave"
+
+#: apps/loans/models.py:16
+msgid "Required"
+msgstr "Obrigatório"
+
+#: apps/loans/models.py:17
+msgid "Type"
+msgstr "Tipo"
+
+#: apps/loans/models.py:18
+msgid "Active"
+msgstr "Ativo"
+
+#: apps/loans/models.py:19
+msgid "Ordering"
+msgstr "Ordenação"
+
+#: apps/loans/models.py:23
+msgid "Question"
+msgstr "Pergunta"
+
+#: apps/loans/models.py:24
+msgid "Questions"
+msgstr "Perguntas"
+
+#: apps/loans/models.py:39
+msgid "Question Option"
+msgstr "Opção de Pergunta"
+
+#: apps/loans/models.py:40
+msgid "Question Options"
+msgstr "Opções de Pergunta"
+
+#: apps/loans/models.py:51
+msgid "Question Label"
+msgstr "Etiqueta da Pergunta"
+
+#: apps/loans/models.py:52
+msgid "Question Key"
+msgstr "Chave da Pergunta"
+
+#: apps/loans/models.py:53
+msgid "Value"
+msgstr "Valor"
+
+#: apps/loans/models.py:61
+msgid "Loan Request Question Response"
+msgstr "Resposta de Pergunta de Solicitação de Empréstimo"
+
+#: apps/loans/models.py:62
+msgid "Loan Request Question Responses"
+msgstr "Respostas de Perguntas de Solicitação de Empréstimo"
+
+#: apps/loans/models.py:65
+#, python-brace-format
+msgid "{question_label}: {value}"
+msgstr "{question_label}: {value}"
+
+#: apps/loans/models.py:70
+msgid "Pending"
+msgstr "Pendente"
+
+#: apps/loans/models.py:71
+msgid "Approved"
+msgstr "Aprovado"
+
+#: apps/loans/models.py:72
+msgid "Rejected"
+msgstr "Rejeitado"
+
+#: apps/loans/models.py:75
+msgid "External Status"
+msgstr "Status Externo"
+
+#: apps/loans/models.py:78
+msgid "Internal Status"
+msgstr "Status Interno"
+
+#: apps/loans/models.py:80
+msgid "Created At"
+msgstr "Criado em"
+
+#: apps/loans/models.py:84
+msgid "Loan Request"
+msgstr "Solicitação de Empréstimo"
+
+#: apps/loans/models.py:85
+msgid "Loan Requests"
+msgstr "Solicitações de Empréstimo"
+
+#: apps/loans/apps.py:8
+msgid "Loans"
+msgstr "Empréstimos"

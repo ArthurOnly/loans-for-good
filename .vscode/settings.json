@@ -1,6 +1,7 @@
 // settings.json
 {
-    "black-formatter.args": ["--config", "pyproject.toml"],
+    "black-formatter.args": ["--config", "backend/pyproject.toml"],
+    "isort.args": ["--settings-path", "backend/pyproject.toml"],
     "[python]": {
       "editor.defaultFormatter": "ms-python.black-formatter",
       "editor.formatOnSave": true,

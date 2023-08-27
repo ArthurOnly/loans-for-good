@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 
 
@@ -30,6 +29,7 @@ class Question(models.Model):
     def __str__(self):
         return self.label
 
+
 class QuestionOption(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     label = models.CharField(_("Label"), max_length=255)
@@ -46,11 +46,14 @@ class QuestionOption(models.Model):
     def key(self):
         return self.label.lower().replace(" ", "_")
 
+
 class LoanRequestQuestionResponse(models.Model):
     question_label = models.CharField(_("Question Label"), max_length=255)
     question_key = models.CharField(_("Question Key"), max_length=255)
     value = models.CharField(_("Value"), max_length=255)
-    file = models.FileField(_("File"), upload_to="apps/loans/storage/loan_request_question_response", null=True, blank=True)
+    file = models.FileField(
+        _("File"), upload_to="apps/loans/storage/loan_request_question_response", null=True, blank=True
+    )
     loan_request = models.ForeignKey("LoanRequest", on_delete=models.CASCADE)
 
     class Meta:
@@ -59,16 +62,8 @@ class LoanRequestQuestionResponse(models.Model):
         verbose_name_plural = _("Loan Request Question Responses")
 
     def __str__(self):
-        return _("{question_label}: {value}").format(
-            question_label=self.question_label, value=self.value
-        )
-    
-    # @property
-    # def file_link(self):
-    #     if self.file:
-    #         return format_html("<a href='%s'>download</a>" % (self.file.url,))
-    #     else:
-    #         return "No attachment"
+        return _("{question_label}: {value}").format(question_label=self.question_label, value=self.value)
+
 
 class LoanRequest(models.Model):
     class LoanStatusChoices(models.TextChoices):
