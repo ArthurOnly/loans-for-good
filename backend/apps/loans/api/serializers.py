@@ -1,6 +1,7 @@
+from rest_framework import serializers
+
 from apps.loans.business import create_loan_request
 from apps.loans.models import LoanRequest, Question, QuestionOption
-from rest_framework import serializers
 
 
 class QuestionOptionSerializer(serializers.ModelSerializer):
@@ -16,10 +17,6 @@ class QuestionSerializer(serializers.ModelSerializer):
         model = Question
         fields = ("id", "label", "key", "required", "type", "active", "ordering", "questionoption_set")
 
-class LoanRequestSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = LoanRequest
-        fields = ("id", "status_external", "status_internal", "response", "created_at")
 
 class LoanRequestResponseSerializer(serializers.Serializer):
     question_label = serializers.CharField()
@@ -27,11 +24,14 @@ class LoanRequestResponseSerializer(serializers.Serializer):
     value = serializers.CharField(required=False)
     file = serializers.FileField(required=False)
 
+
 class LoanRequestSerializer(serializers.ModelSerializer):
-    loanrequestquestionresponse_set = LoanRequestResponseSerializer(many=True) 
+    loanrequestquestionresponse_set = LoanRequestResponseSerializer(many=True)
+
     class Meta:
         model = LoanRequest
         fields = ("id", "status_external", "status_internal", "loanrequestquestionresponse_set", "created_at")
+
 
 class LoanRequestCreateSerializer(serializers.Serializer):
     response = LoanRequestResponseSerializer(many=True)
@@ -52,14 +52,14 @@ class LoanRequestCreateSerializer(serializers.Serializer):
         fields = []
         for key, value in formated.items():
             fields.append(value)
-        
+
         return super().to_internal_value({"response": fields})
-    
+
     def to_representation(self, instance):
         return LoanRequestSerializer(instance).data
 
     def update(self, instance, validated_data):
         raise NotImplementedError()
-    
+
     def create(self, validated_data):
         return create_loan_request(validated_data)

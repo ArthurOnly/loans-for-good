@@ -1,3 +1,8 @@
+"""
+Global DRF Viewsets Mixins
+"""
+
+
 class SerializerAndPrefetchMixin:
     """
     A mixin that permits to define a serializer class for each action and a list of fields to prefetch.
@@ -10,7 +15,7 @@ class SerializerAndPrefetchMixin:
 
     def get_serializer_class(self):
         serializer_class = self.serializer_class
-        if type(serializer_class) == dict:
+        if isinstance(serializer_class, dict):
             if self.action in serializer_class:
                 return serializer_class[self.action]
             return serializer_class["default"]
@@ -43,7 +48,7 @@ class PermissionsMixin:
 
     def get_permissions(self):
         permission_classes = self.permission_classes
-        if type(permission_classes) == dict:
+        if isinstance(permission_classes, dict):
             if self.action in permission_classes:
                 return [permission() for permission in permission_classes[self.action]]
             return [permission() for permission in permission_classes["default"]]

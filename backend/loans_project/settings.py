@@ -167,5 +167,5 @@ LOCALE_PATHS = [os.path.join(BASE_DIR, "locale")]
 
 try:
     from .local_settings import *
-except ImportError:
-    raise ImportError("local_settings.py not found")
+except ImportError as exc:
+    raise ImportError("Couldn't import local settings. Make sure you have a local_settings.py file.") from exc

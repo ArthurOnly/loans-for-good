@@ -3,7 +3,7 @@ from rest_framework.renderers import JSONRenderer
 
 class CustomRenderer(JSONRenderer):
     def render(self, data, accepted_media_type=None, renderer_context=None):
-        if type(data) == dict and data.get("success", None) == False:
+        if isinstance(data, dict) and data.get("success", None) is False:
             return super(CustomRenderer, self).render(data, accepted_media_type, renderer_context)
 
         response = {"data": data, "metadata": {}, "success": True, "errors": []}

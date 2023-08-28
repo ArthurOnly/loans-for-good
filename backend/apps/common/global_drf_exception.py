@@ -1,6 +1,5 @@
 from django.core.exceptions import PermissionDenied
 from django.http import Http404
-from django.utils.translation import get_language
 from rest_framework import exceptions
 from rest_framework.response import Response
 from rest_framework.views import exception_handler

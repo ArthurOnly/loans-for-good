@@ -1,5 +1,3 @@
-from cProfile import label
-
 from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
 from django.db import transaction
@@ -17,7 +15,7 @@ class Command(BaseCommand):
             self._create_user()
             self._create_questions()
 
-        self.stdout.write(f"Importação concluída!    ")
+        self.stdout.write("Importação concluída!    ")
 
     def _create_user(self):
         usermodel = get_user_model()
