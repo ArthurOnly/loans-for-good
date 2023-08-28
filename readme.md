@@ -23,7 +23,7 @@ cd loans-for-good
 ```
 3. Criando arquivo local_settings
 ```
-cp loans_project/local_settings_sample.py loans_project/local_settings.py
+cp backend/loans_project/local_settings_sample.py backend/loans_project/local_settings.py
 ```
 4. Criando containers
 ```
