@@ -10,7 +10,7 @@ class CreditApiFacade:
             self.url = url
 
     def verify_credit(self, data):
-        response = requests.post(self.url, data=self._parse_data(data), headers=self.headers, timeout=10)
+        response = requests.post(self.url, data=self._parse_data(data), headers=self.headers, timeout=120)
         approved = response.json().get("approved", False) is True
         return approved
 
