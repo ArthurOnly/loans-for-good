@@ -27,9 +27,9 @@ cp backend/loans_project/local_settings_sample.py backend/loans_project/local_se
 ```
 4. Criando containers
 ```
-docker compose up
+docker compose up -d
 ```
-5. Criando dados iniciais
+5. Após os containers estarem sendo executados, para criar os dados iniciais
 ```
 docker compose exec django python manage.py seed_loans
 ```
@@ -40,11 +40,15 @@ docker compose exec django python manage.py seed_loans
 Para usar loans_project, siga estas etapas:
 * Para executar o sistema
 ```
-docker compose up
+docker compose up -d
 ```
 * Para executar os testes
 ```
 docker compose exec django python manage.py test
+```
+* Para executar o pylint
+```
+pylint --rcfile backend/pylintrc backend
 ```
 
 ### Uso geral
