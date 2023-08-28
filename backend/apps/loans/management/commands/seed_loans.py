@@ -20,8 +20,8 @@ class Command(BaseCommand):
         self.stdout.write(f"Importação concluída!    ")
 
     def _create_user(self):
-        user_model = get_user_model()
-        user_model.objects.create_superuser(
+        usermodel = get_user_model()
+        usermodel.objects.create_superuser(
             username="admin",
             email="admin@mail.com",
             password="admin",

@@ -32,3 +32,19 @@ class SerializerAndPrefetchMixin:
             qs = qs.prefetch_related(*self.qs_prefetch_fields)
 
         return qs
+
+
+class PermissionsMixin:
+    """
+    A mixin that permits to define a permission class for each action.
+    """
+
+    permission_classes = None
+
+    def get_permissions(self):
+        permission_classes = self.permission_classes
+        if type(permission_classes) == dict:
+            if self.action in permission_classes:
+                return [permission() for permission in permission_classes[self.action]]
+            return [permission() for permission in permission_classes["default"]]
+        return [permission() for permission in permission_classes]

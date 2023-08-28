@@ -27,7 +27,10 @@ class QuestionViewSet(CustomReadOnlyModelViewSet):
 
 
 class LoanRequestViewset(CustomModelViewSet):
-    permission_classes = [permissions.AllowAny]
+    permission_classes = {
+        "default": [permissions.IsAdminUser],
+        "create": [permissions.AllowAny],
+    }
     serializer_class = LoanRequestCreateSerializer
     queryset = LoanRequest.objects.all()
     parser_classes = [MultiPartParser]
